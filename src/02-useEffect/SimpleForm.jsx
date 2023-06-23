@@ -32,7 +32,7 @@ export const SimpleForm = () => {
 
   return (
     <>
-      <h1>Foormulario Simple</h1>
+      <h1>Formulario Simple</h1>
       <hr />
 
       <input 
