@@ -1,12 +1,16 @@
+import { useCounter } from "../hooks/useCounter";
 import { useFetch } from "../hooks/useFetch"
 
 export const MultipleCustomHooks = () => {
 
-  const { data, isLoading, hasError } = useFetch('https://pokeapi.co/api/v2/pokemon-form/4');
+  const {counter, increment, decrement, reset } = useCounter(4);
 
+  const { data, isLoading, hasError } = useFetch(`https://pokeapi.co/api/v2/pokemon-form/${ counter }`);
+  
   // console.log( data );
-
+  
   const { id, name } = !!data && data;
+
 
   return (
     <>
@@ -29,8 +33,16 @@ export const MultipleCustomHooks = () => {
           )
       }
 
-      <button className="btn btn-primary">
+      <button className="btn btn-primary" 
+      disabled={ isLoading }
+      onClick={ () => increment() }>
         Next quote
+      </button>
+      <button className="btn btn-primary" onClick={ reset }>
+        Reset
+      </button>
+      <button className="btn btn-primary" onClick={ () => decrement() }>
+        Previus quote
       </button>
 
 
