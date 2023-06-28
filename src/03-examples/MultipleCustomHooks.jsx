@@ -1,5 +1,5 @@
-import { useCounter } from "../hooks/useCounter";
-import { useFetch } from "../hooks/useFetch"
+import { useCounter, useFetch } from '../hooks';
+import { LoadingQuote, Quote } from './';
 
 export const MultipleCustomHooks = () => {
 
@@ -7,10 +7,7 @@ export const MultipleCustomHooks = () => {
 
   const { data, isLoading, hasError } = useFetch(`https://pokeapi.co/api/v2/pokemon-form/${ counter }`);
   
-  // console.log( data );
-  
   const { id, name } = !!data && data;
-
 
   return (
     <>
@@ -18,20 +15,30 @@ export const MultipleCustomHooks = () => {
       <hr />
 
       {
-        isLoading 
-          ? (
-              <div className="alert alert-info text-center">
-                Loading...
-              </div>
 
-          )
-          : (
-              <blockquote className="blockquote text-end">
-                <p className="mb-1">{ id }</p>
-                <footer className="blockquote-footer"> { name } </footer>
-              </blockquote>
-          )
+        isLoading
+          ? <LoadingQuote />
+          : <Quote id={id} name={name} />
+
+        /////Lo de arriba sustituye lo de abajo
+        /////pero más optimizado
+        
+        // isLoading 
+        //   ? (
+        //       <div className="alert alert-info text-center">
+        //         Loading...
+        //       </div>
+
+        //   )
+        //   : (
+        //       <blockquote className="blockquote text-end">
+        //         <p className="mb-1">{ id }</p>
+        //         <footer className="blockquote-footer"> { name } </footer>
+        //       </blockquote>
+        //   )
       }
+      
+      
 
       <button className="btn btn-primary" 
       disabled={ isLoading }
